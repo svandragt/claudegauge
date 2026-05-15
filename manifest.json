@@ -2,7 +2,7 @@
   "Name": "Claude Gauge",
   "Version": "0.1.0",
   "Author": "Sander van Dragt",
-  "URL": "https://vandragt.com",
+  "URL": "https://github.com/svandragt/claudegauge",
   "Email": "sander@vandragt.com",
   "Description": "Shows current Claude usage as a fill gauge (weekly background, 5h-block foreground).",
   "Icon": "icon",

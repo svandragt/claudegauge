@@ -1,5 +1,7 @@
 # Claude Gauge
 
+[github.com/svandragt/claudegauge](https://github.com/svandragt/claudegauge)
+
 An [OpenDeck](https://github.com/nekename/OpenDeck) / Elgato Stream Deck plugin that turns one key into a fill gauge of your current Claude usage.
 
 - **Background fill (yellow)** — current week's tokens vs. the peak of your prior 4 weeks.
@@ -18,7 +20,7 @@ Both numbers come from [ccusage](https://github.com/ryoppippi/ccusage), which re
 ### OpenDeck (Linux, deb)
 
 ```sh
-git clone https://github.com/<you>/claudegauge com.vandragt.claudegauge.sdPlugin
+git clone https://github.com/svandragt/claudegauge.git com.vandragt.claudegauge.sdPlugin
 cd com.vandragt.claudegauge.sdPlugin
 npm install
 cp -r . ~/.config/opendeck/plugins/com.vandragt.claudegauge.sdPlugin
