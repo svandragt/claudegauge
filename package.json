@@ -1,0 +1,10 @@
+{
+  "name": "claudegauge-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "plugin.js",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

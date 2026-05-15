@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+  "packages": ["nodejs@22"],
+  "shell": {
+    "init_hook": [],
+    "scripts": {
+      "install": "npm install --no-audit --no-fund",
+      "usage": "node usage.js",
+      "render": "node -e \"const {renderGauge}=require('./render.js'); const u=renderGauge({weeklyPct:0.4,sessionPct:0.7}); require('fs').writeFileSync('actions/gauge.svg', Buffer.from(u.split(',')[1],'base64')); console.log('wrote actions/gauge.svg');\""
+    }
+  }
+}

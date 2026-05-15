@@ -1,0 +1,4 @@
+node_modules/
+.devbox/
+plugin.log
+actions/gauge.svg

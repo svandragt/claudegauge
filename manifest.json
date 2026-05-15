@@ -1,0 +1,30 @@
+{
+  "Name": "Claude Gauge",
+  "Version": "0.1.0",
+  "Author": "Sander van Dragt",
+  "URL": "https://vandragt.com",
+  "Email": "sander@vandragt.com",
+  "Description": "Shows current Claude usage as a fill gauge (weekly background, 5h-block foreground).",
+  "Icon": "icon",
+  "Category": "Claude",
+  "CategoryIcon": "icon",
+  "CodePath": "run.sh",
+  "CodePathMac": "run.sh",
+  "CodePathWin": "plugin.js",
+  "SDKVersion": 2,
+  "OS": [
+    { "Platform": "linux", "MinimumVersion": "0" },
+    { "Platform": "mac", "MinimumVersion": "10.11" },
+    { "Platform": "windows", "MinimumVersion": "10" }
+  ],
+  "Software": { "MinimumVersion": "6.0" },
+  "Actions": [
+    {
+      "UUID": "com.vandragt.claudegauge.gauge",
+      "Name": "Claude Gauge",
+      "Icon": "actions/gauge",
+      "Tooltip": "Live Claude usage gauge",
+      "States": [{ "Image": "actions/gauge", "TitleAlignment": "bottom" }]
+    }
+  ]
+}
