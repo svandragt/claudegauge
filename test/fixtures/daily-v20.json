@@ -1,0 +1,11 @@
+{
+  "daily": [
+    { "agent": "all", "period": "2026-05-04", "totalTokens": 1000000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 },
+    { "agent": "all", "period": "2026-05-05", "totalTokens": 2000000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 },
+    { "agent": "all", "period": "2026-05-11", "totalTokens": 5000000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 },
+    { "agent": "all", "period": "2026-05-12", "totalTokens": 3000000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 },
+    { "agent": "all", "period": "2026-05-18", "totalTokens": 4000000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 },
+    { "agent": "all", "period": "2026-05-25", "totalTokens": 1500000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 },
+    { "agent": "all", "period": "2026-05-26", "totalTokens": 500000, "inputTokens": 0, "outputTokens": 0, "cacheCreationTokens": 0, "cacheReadTokens": 0 }
+  ]
+}

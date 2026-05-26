@@ -1,0 +1,48 @@
+{
+  "blocks": [
+    {
+      "id": "block-old-1",
+      "isActive": false,
+      "isGap": false,
+      "tokenCounts": {
+        "inputTokens": 1000,
+        "outputTokens": 2000,
+        "cacheCreationInputTokens": 7000,
+        "cacheReadInputTokens": 10000
+      }
+    },
+    {
+      "id": "gap-1",
+      "isActive": false,
+      "isGap": true,
+      "tokenCounts": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "cacheReadInputTokens": 0
+      }
+    },
+    {
+      "id": "block-old-2",
+      "isActive": false,
+      "isGap": false,
+      "tokenCounts": {
+        "inputTokens": 500,
+        "outputTokens": 1500,
+        "cacheCreationInputTokens": 3000,
+        "cacheReadInputTokens": 5000
+      }
+    },
+    {
+      "id": "block-current",
+      "isActive": true,
+      "isGap": false,
+      "tokenCounts": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheCreationInputTokens": 1000,
+        "cacheReadInputTokens": 4000
+      }
+    }
+  ]
+}

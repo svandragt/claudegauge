@@ -18,13 +18,5 @@ jobs:
 
       - run: npm install --no-audit --no-fund
 
-      - name: Unit tests
+      - name: Tests (unit + ccusage integration)
         run: npm test
-
-      - name: ccusage CLI surface check
-        run: |
-          set -euo pipefail
-          npx ccusage --version
-          npx ccusage blocks --help | grep -q -- '--active'
-          npx ccusage blocks --help | grep -q -- '--token-limit'
-          npx ccusage daily --help

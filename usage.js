@@ -23,18 +23,12 @@ function sumTokens(tc) {
 
 function pickSessionPct(blocksJson) {
   const blocks = blocksJson.blocks || [];
-  const active = blocks.find(b => b.isActive) || blocks[blocks.length - 1];
+  const active = blocks.find(b => b.isActive);
   if (!active) return 0;
-
-  if (typeof active.usagePercent === 'number') return active.usagePercent / 100;
-  if (active.projection && typeof active.projection.percentUsed === 'number') return active.projection.percentUsed / 100;
-
-  const limit = active.tokenLimitStatus && active.tokenLimitStatus.limit;
-  if (limit) return sumTokens(active.tokenCounts) / limit;
 
   let peak = 0;
   for (const b of blocks) {
-    if (b === active) continue;
+    if (b === active || b.isGap) continue;
     peak = Math.max(peak, sumTokens(b.tokenCounts));
   }
   if (peak === 0) return 0;
@@ -55,8 +49,10 @@ function pickWeeklyPct(dailyJson) {
 
   const byWeek = new Map();
   for (const day of days) {
-    if (!day.date) continue;
-    const key = mondayKey(day.date);
+    if (day.agent && day.agent !== 'all') continue;
+    const date = day.period || day.date;
+    if (!date) continue;
+    const key = mondayKey(date);
     const tokens = day.totalTokens ?? sumTokens(day);
     byWeek.set(key, (byWeek.get(key) || 0) + tokens);
   }
@@ -75,7 +71,7 @@ function pickWeeklyPct(dailyJson) {
 
 async function getUsage() {
   const [blocksJson, dailyJson] = await Promise.all([
-    runCcusage(['blocks', '--active', '--token-limit', 'max']),
+    runCcusage(['blocks']),
     runCcusage(['daily']),
   ]);
   return {
