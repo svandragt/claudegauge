@@ -4,7 +4,13 @@
   "private": true,
   "type": "commonjs",
   "main": "plugin.js",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
   "dependencies": {
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "ccusage": "18.0.11"
   }
 }

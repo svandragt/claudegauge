@@ -1,6 +1,6 @@
 const { execFile } = require('node:child_process');
 
-const CCUSAGE_VERSION = '18.0.11';
+const CCUSAGE_VERSION = require('./package.json').devDependencies.ccusage;
 
 function runCcusage(args, timeoutMs = 30000) {
   return new Promise((resolve, reject) => {
@@ -41,34 +41,51 @@ function pickSessionPct(blocksJson) {
   return sumTokens(active.tokenCounts) / peak;
 }
 
-function pickWeeklyPct(weeklyJson) {
-  const weeks = weeklyJson.weekly || weeklyJson.weeks || weeklyJson.data || [];
-  if (!Array.isArray(weeks) || weeks.length === 0) return 0;
+function mondayKey(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00Z');
+  const dow = d.getUTCDay();
+  const offset = (dow + 6) % 7;
+  d.setUTCDate(d.getUTCDate() - offset);
+  return d.toISOString().slice(0, 10);
+}
 
-  const sorted = [...weeks].sort((a, b) => String(a.week || a.date || '').localeCompare(String(b.week || b.date || '')));
-  const current = sorted[sorted.length - 1];
+function pickWeeklyPct(dailyJson) {
+  const days = dailyJson.daily || [];
+  if (!Array.isArray(days) || days.length === 0) return 0;
+
+  const byWeek = new Map();
+  for (const day of days) {
+    if (!day.date) continue;
+    const key = mondayKey(day.date);
+    const tokens = day.totalTokens ?? sumTokens(day);
+    byWeek.set(key, (byWeek.get(key) || 0) + tokens);
+  }
+
+  const sorted = [...byWeek.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  if (sorted.length === 0) return 0;
+
+  const current = sorted[sorted.length - 1][1];
   const prior = sorted.slice(-5, -1);
   if (prior.length === 0) return 0;
 
-  const currentTokens = current.totalTokens ?? sumTokens(current);
-  const peak = Math.max(...prior.map(w => w.totalTokens ?? sumTokens(w)));
+  const peak = Math.max(...prior.map(([, t]) => t));
   if (!peak) return 0;
-  return currentTokens / peak;
+  return current / peak;
 }
 
 async function getUsage() {
-  const [blocksJson, weeklyJson] = await Promise.all([
+  const [blocksJson, dailyJson] = await Promise.all([
     runCcusage(['blocks', '--active', '--token-limit', 'max']),
-    runCcusage(['weekly', '--start-of-week', 'monday']),
+    runCcusage(['daily']),
   ]);
   return {
     sessionPct: pickSessionPct(blocksJson),
-    weeklyPct: pickWeeklyPct(weeklyJson),
-    raw: { blocksJson, weeklyJson },
+    weeklyPct: pickWeeklyPct(dailyJson),
+    raw: { blocksJson, dailyJson },
   };
 }
 
-module.exports = { getUsage, pickSessionPct, pickWeeklyPct };
+module.exports = { getUsage, pickSessionPct, pickWeeklyPct, mondayKey };
 
 if (require.main === module) {
   getUsage().then(u => {
