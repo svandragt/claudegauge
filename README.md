@@ -11,7 +11,7 @@ Both numbers come from [ccusage](https://github.com/ryoppippi/ccusage), which re
 
 - **Node.js 18+** on PATH.
 - **OpenDeck** (Linux deb / Flatpak) or **Elgato Stream Deck** software.
-- The first run downloads `ccusage` via `npx`; needs network once.
+- `npm install` fetches `ccusage` (pinned in `package.json`); needs network at install time.
 
 ## Install
 
@@ -66,6 +66,16 @@ Logs are written next to the installed plugin: `plugin.log` (and OpenDeck's own 
 
 - **"no 'node' on PATH"** in `plugin.log` — install Node or expose your existing install to the host's spawn environment.
 - **`ccusage … failed`** — make sure `~/.claude/projects/` exists and has at least one session JSONL. For Flatpak OpenDeck, check the filesystem overrides above.
+
+## Development
+
+```sh
+npm install
+npm test           # unit tests for the parsers and renderer
+make test          # live ccusage call against your own data
+```
+
+CI (GitHub Actions) runs `npm test` plus a CLI surface check against ccusage, so dependabot bumps that would break the plugin fail the PR.
 
 ## License
 
