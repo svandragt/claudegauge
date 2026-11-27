@@ -11,6 +11,6 @@
     "ws": "^8.23.0"
   },
   "devDependencies": {
-    "ccusage": "20.0.51"
+    "ccusage": "20.1.1"
   }
 }
